@@ -12,18 +12,18 @@ request(url, (error, response, body) => {
   }
   const data = JSON.parse(body);
   const characters = data.characters;
-  const characterNames = [];
+  const characterNames = new Array(characters.length);
 
   let count = 0;
 
-  characters.forEach(characterUrl => {
+  characters.forEach((characterUrl, index) => {
     request(characterUrl, (error, response, body) => {
       if (error) {
         console.error('Error:', error);
         return;
       }
       const characterData = JSON.parse(body);
-      characterNames.push(characterData.name);
+      characterNames[index] = characterData.name;
 
       count++;
       if (count === characters.length) {
