@@ -12,6 +12,9 @@ request(url, (error, response, body) => {
   }
   const data = JSON.parse(body);
   const characters = data.characters;
+  const characterNames = [];
+
+  let count = 0;
 
   characters.forEach(characterUrl => {
     request(characterUrl, (error, response, body) => {
@@ -20,7 +23,12 @@ request(url, (error, response, body) => {
         return;
       }
       const characterData = JSON.parse(body);
-      console.log(characterData.name);
+      characterNames.push(characterData.name);
+
+      count++;
+      if (count === characters.length) {
+        characterNames.forEach(name => console.log(name));
+      }
     });
   });
 });
