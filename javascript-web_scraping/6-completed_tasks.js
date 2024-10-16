@@ -9,7 +9,7 @@ request(apiUrl, (error, response, body) => {
     console.error('Erreur lors de la requête:', error);
     return;
   }
-  
+
   const todos = JSON.parse(body);
   const completedTasks = {};
 
